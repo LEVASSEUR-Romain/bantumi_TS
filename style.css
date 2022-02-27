@@ -1,0 +1,48 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#play {
+    display: flex;
+    width: 100vw;
+    height: 70vh;
+}
+
+.boardGame {
+    display: flex;
+    flex-direction: column;
+    flex: 6;
+}
+
+.attics {
+    flex: 2;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+ul {
+    display: flex;
+    flex: 1;
+}
+
+li {
+    list-style-type: none;
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid black;
+}
+
+button {
+    margin-top: 20px;
+}
