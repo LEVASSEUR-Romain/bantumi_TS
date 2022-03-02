@@ -3,6 +3,11 @@
     padding: 0;
 }
 
+:root {
+    --colorplayer1: blue;
+    --colorplayer2: red;
+}
+
 body {
     display: flex;
     flex-direction: column;
@@ -23,10 +28,10 @@ body {
 
 .attics {
     flex: 2;
-    border: 1px solid red;
     display: flex;
     justify-content: center;
     align-items: center;
+    border: 1px solid black;
 }
 
 ul {
@@ -41,6 +46,22 @@ li {
     justify-content: center;
     align-items: center;
     border: 1px solid black;
+}
+
+.player_1 {
+    background-color: var(--colorplayer1);
+}
+
+.player_2 {
+    background-color: var(--colorplayer2);
+}
+
+#attics1 {
+    background-color: var(--colorplayer1);
+}
+
+#attics2 {
+    background-color: var(--colorplayer2);
 }
 
 button {
