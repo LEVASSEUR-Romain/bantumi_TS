@@ -1,7 +1,8 @@
 //variable modifiable
-const tokenStart: number = 2;
+const tokenStart: number = 4;
 const playerStart: number = 1;
 const winToken: number[] = [2, 3];
+const winCondition: number = (tokenStart * 12) / 2;
 // déclaration des variables
 const boardPlayer1 = document.getElementsByClassName("player_1");
 const boardPlayer2 = document.getElementsByClassName("player_2");
@@ -10,6 +11,7 @@ const spanPlayerTurn = document.getElementById(
 ) as HTMLSpanElement;
 const atticsPlayer1 = document.getElementById("attics1") as HTMLDivElement;
 const atticsPlayer2 = document.getElementById("attics2") as HTMLDivElement;
+const newGame = document.getElementById("newGame") as HTMLButtonElement;
 const atticsStart: number = 0;
 const withBoardPlayer: number = 6;
 let playerTurn: number = playerStart;
@@ -19,6 +21,11 @@ const emptyHtml: number = 0;
 const targetMin: number = 1;
 const targetMax: number = 12;
 const idBoard: string = "target_";
+
+newGame.addEventListener("click", () => {
+  stratGame();
+});
+
 const addeventListenerBoard = (): void => {
   let playerElementBoard = boardPlayer1;
   for (let i = 0; i < withBoardPlayer; i++) {
@@ -52,7 +59,10 @@ const stratGame = (): void => {
 
 const distributionToken = (event: Event) => {
   const liTarget = event.target as HTMLLIElement;
-  if (getNumberPlayer(liTarget) === playerTurn) {
+  if (
+    getNumberPlayer(liTarget) === playerTurn &&
+    parseInt(liTarget.innerText) != 0
+  ) {
     const tokenTarget: number = parseInt(liTarget.innerHTML);
     const localisationTarget: number = getNumberLocalisationTarget(liTarget);
     removeTokenTarget(liTarget);
@@ -135,10 +145,75 @@ const removeTokenOnBoardAddPointChangePlayerTurn = (
       removeTokenTarget(LiLast);
     }
   }
+  if (isEndGameOrEgalite()) {
+    endGame();
+  }
   changePlayerTurn();
+  if (playerCantPlay()) {
+    endGameNotPlay();
+  }
 };
-const isEndGame = (): boolean => {};
-const endGame = (): void => {};
+const isEndGameOrEgalite = (): boolean => {
+  if (
+    parseInt(atticsPlayer1.innerText) > winCondition ||
+    parseInt(atticsPlayer2.innerText) > winCondition
+  ) {
+    return true;
+  }
+  if (
+    parseInt(atticsPlayer1.innerText) === winCondition &&
+    parseInt(atticsPlayer2.innerText) === winCondition
+  ) {
+    endGame();
+  }
+  return false;
+};
+
+const playerCantPlay = (): boolean => {
+  const boardPlayer = Array.prototype.slice.call(
+    playerTurn === 1 ? boardPlayer1 : boardPlayer2
+  );
+  const initial = boardPlayer[0].innerText;
+  const total = boardPlayer.reduce((a, b) => {
+    return parseInt(a) + parseInt(b.innerText);
+  }, initial);
+  if (total === 0) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const endGameNotPlay = (): void => {
+  // le current player recupere tous les points de l'enemenie
+  const boardPlayer = Array.prototype.slice.call(
+    playerTurn === 1 ? boardPlayer2 : boardPlayer1
+  );
+  const initial = boardPlayer[0].innerText;
+  const total = boardPlayer.reduce((a, b) => {
+    return parseInt(a) + parseInt(b.innerText);
+  }, initial);
+  // On incrémente le score et fin du jeu
+  addToAtticsPlayer(total);
+  endGame();
+};
+
+const endGame = (): void => {
+  let winner = "";
+  if (parseInt(atticsPlayer1.innerText) > winCondition) {
+    winner = "Player 1";
+    console.log(winner);
+  }
+  if (parseInt(atticsPlayer2.innerText) > winCondition) {
+    winner = "Player 2";
+  }
+  if (parseInt(atticsPlayer1.innerText) === parseInt(atticsPlayer2.innerText)) {
+    alert("Match nul");
+  } else {
+    console.log(winner);
+    alert("le gagnant est : " + winner + " ");
+  }
+  stratGame();
+};
 // on lance la game **************************************************
 stratGame();
-// gerer la partie avec un bot

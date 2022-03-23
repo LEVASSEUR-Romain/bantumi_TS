@@ -30,10 +30,57 @@
       </div>
       <div id="attics2" class="attics"></div>
     </section>
-    <button>Nouvelle partie</button>
-    <div class="playerTurn">
-      C'est au joueur <span id="playerToPlay"></span> de jouer
-    </div>
+    <section class="info">
+      <button id="newGame">Nouvelle partie</button>
+      <div class="playerTurn">
+        C'est au joueur <span id="playerToPlay"></span> de jouer
+      </div>
+    </section>
+    <section class="rules">
+      <ul>
+        <li>
+          But du jeu : S’emparer d’un maximum de graines. Le joueur qui a
+          recuperé plus de la moitié des graines a la fin de la partie
+          l’emporte.
+        </li>
+        <li>Nombre de joueurs : 2 sur le même PC</li>
+        <li>
+          Préparation : Le plateau est placé horizontalement entre les deux
+          joueurs. Chaque joueur place 4 graines dans chacun des 6 trous devant
+          lui.
+        </li>
+      </ul>
+      <h1>Deroulement du jeu</h1>
+      <ul>
+        <li>Plateau : La partie se joue sur le plateau de 2×6 trous.</li>
+        <li>
+          Greniers : (trous plus grands à chacune des deux extrémités) ils ne
+          servent qu’à ranger les graines des joueurs.
+        </li>
+        <li>
+          Jouer un coup : Le 1er joueur prend toutes les graines de l’un des 6
+          trous se trouvant de son côté et en dépose une dans chaque trou
+          suivant celui qu’il a vidé.
+        </li>
+        <li>Sens de la partie : antihoraire.</li>
+        <li>
+          Capture : si la dernière graine est déposée dans un trou de
+          l’adversaire comportant déjà 1 ou 2 graines, le joueur capture les 2
+          ou 3 graines résultantes. Les graines capturées sont alors sorties du
+          jeu (grenier) et le trou est laissé vide.
+        </li>
+        <li>
+          –> Rafle : Lorsqu’un joueur s’empare de 2 ou 3 graines, si la case
+          précédente contient également 2 ou 3 graines, elles sont capturées
+          aussi et ainsi de suite.
+        </li>
+        <li>
+          Fin du jeu : le jeu se termine lorsqu’un joueur n’a plus de graines
+          dans son camp (et ne peut donc plus jouer). L’adversaire capture alors
+          les graines restantes.
+        </li>
+      </ul>
+    </section>
     <script src="./dist/app.js"></script>
   </body>
 </html>
